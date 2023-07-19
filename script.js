@@ -14,7 +14,7 @@ function init() {
     document.getElementById("3d-viewer").appendChild(renderer.domElement);
 
     const loader = new THREE.GLTFLoader();
-    loader.load('/Wallet_2.glb', function (gltf) {
+    loader.load('./Wallet_2.glb', function (gltf) {
         model = gltf.scene;
         scene.add(model);
 
