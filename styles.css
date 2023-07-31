@@ -18,8 +18,8 @@ body, html {
 #3d-viewer {
     width: 600px; 
     height: 600px;
-    background-color: lavender;
-    color: lavender;
+    background-color: #e6e6fa;
+    color: #e6e6fa;
     justify-content: center;
     align-items: center;
     display: flex;
