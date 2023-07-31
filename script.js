@@ -2,19 +2,19 @@ let scene, camera, renderer, model, directionalLight;
 let isDragging = false;
 let previousMouseX = 0;
 let previousMouseY = 0;
-let rotateSpeed = 0.002;
-let dampingFactor = 1;
+let rotateSpeed = 0.001;
+let dampingFactor = .9999;
 
 function init() {
     scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x010305);
-    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    scene.background = new THREE.Color(0xe6e6fa);
+    camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 1200);
     renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.getElementById("3d-viewer").appendChild(renderer.domElement);
 
     const loader = new THREE.GLTFLoader();
-    loader.load('./Wallet_2.glb', function (gltf) {
+    loader.load('/Models/Wallet_2.glb', function (gltf) {
         model = gltf.scene;
         scene.add(model);
 
@@ -22,25 +22,23 @@ function init() {
         const center = boundingBox.getCenter(new THREE.Vector3());
         model.position.sub(center);
 
-        model.rotation.set(Math.PI / 2, Math.PI / 180, Math.PI / 2);
-        model.rotation.z += Math.PI / 2;
+        model.rotation.set(Math.PI / 1, Math.PI / 1, Math.PI / 1);
+        model.rotation.z += Math.PI / 1;
 
-        model.scale.set(40.1, 40.1, 40.1);
-
-        directionalLight = new THREE.DirectionalLight(0xffffff, 3.0);
-        scene.add(directionalLight);
+        model.scale.set(50.1, 50.1, 50.1);
     });
 
-    camera.position.z = 4;
-    camera.position.y = 0;
-    camera.position.x = 0;
+    camera.position.z = 0.5;
+    camera.position.y = 5;
+    camera.position.x = -.3;
+    camera.rotation.x = 17;
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.0);
+    const directionalLight2 = new THREE.DirectionalLight(0xffffff, 5.0);
+    scene.add(directionalLight2);
+
+    const ambientLight = new THREE.AmbientLight(0xe0e1dd, 2.0, 10);
+    ambientLight.position.set(-5, 7, 1);
     scene.add(ambientLight);
-
-    const pointLight = new THREE.PointLight(0xff0000, 0.0, 10);
-    pointLight.position.set(-5, 5, 5);
-    scene.add(pointLight);
 
     document.addEventListener("mousedown", onDocumentMouseDown, false);
     document.addEventListener("mouseup", onDocumentMouseUp, false);
@@ -75,7 +73,7 @@ function onDocumentMouseMove(event) {
         let deltaY = event.clientY - previousMouseY;
 
         model.rotation.y += deltaX * rotateSpeed * 2;
-        model.rotation.x += deltaY * rotateSpeed;
+        model.rotation.x += deltaY * rotateSpeed * 2;
 
         previousMouseX = event.clientX;
         previousMouseY = event.clientY;
