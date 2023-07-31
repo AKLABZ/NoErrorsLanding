@@ -20,4 +20,8 @@ body, html {
     height: 600px;
     background-color: lavender;
     color: lavender;
+    justify-content: center;
+    align-items: center;
+    display: flex;
 }
+
